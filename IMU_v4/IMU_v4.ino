@@ -42,6 +42,27 @@ void setup() {
   //sw_reset(); // software reset
   //axis_w_tare();// Tare with current orientation
 
+typedef struct{ //initialize struct
+    float pitch;
+    float yaw;
+    float roll;
+    }euler_angles;
+
+    typedef struct{
+    float x;
+    float y;
+    float z;
+    }accel;
+
+    typedef struct{
+    float rot_array[9];
+    }rot;
+
+    typedef struct{
+    euler_angles e_orient;
+    accel r_accel;
+    rot r_matrix;
+    }yost_imu; // user defined data type
 
     //yost_imu rocket = {{0,0,0},{0,0,0}}; // place holder vaules until sensor is updated
 
@@ -90,12 +111,13 @@ void update_yost(yost_imu *imu_ptr){ // point to memory address (get contents of
     imu_ptr->e_orient.yaw = *(euler_orient + 1);
     imu_ptr->e_orient.roll = *(euler_orient + 2);
 
-    // yost imu library 
+     //yost imu library 
     float *accel = yost.read_accel_filtered(); // point to memory address of array
     
     imu_ptr->r_accel.x = *accel; // point (imu_ptr) to r_accel and access the x filed
     imu_ptr->r_accel.y = *(accel + 1);
     imu_ptr->r_accel.z = *(accel + 2);
+
 
     // yost imu library 
     float *rm = yost.rotation_matrix();
@@ -106,6 +128,7 @@ void update_yost(yost_imu *imu_ptr){ // point to memory address (get contents of
     Serial.print(imu_ptr->r_matrix.rot_array[i]); 
     Serial.println();
     }
+
 
     Serial.print("Pitch: ");
     Serial.print(imu_ptr->e_orient.pitch); 
@@ -137,6 +160,7 @@ void update_yost(yost_imu *imu_ptr){ // point to memory address (get contents of
 
     Serial.print(""); // \n
     Serial.println();
+    
 
 
     

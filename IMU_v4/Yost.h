@@ -79,14 +79,16 @@ class Yost
      float accelFloat;
     } accel;
 
-   float xyz_accel[3]; // store each float (every 4 bytes) into an index of the xyz_euler array
+
 
    union rot_matrix_tag {
      byte rotArray[4]; // Rotation matrix. {Return Len: 36 bytes} {Return Data Format: Rotation Matrix(float x9)}
      float rotFloat;
     } rotation;
 
-   float rotation_accel[9]; // store each float (every 4 bytes) into an index of the xyz_euler array
+
+
+
 
 };
 
