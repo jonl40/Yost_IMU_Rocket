@@ -1,2 +1,2 @@
 # Rocket_Code
-C or arduino code to be implemented for a rocket 
+C/C++ code to interface with Yost 3-Space™ LX Embedded part number TSS-LX using arduino  
